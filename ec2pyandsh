@@ -1,0 +1,163 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# 2024-08-02 rady.endrasmoro@woodside.com - added comment
+# python aws_s3_copy_files.py -f archive-procon-hbhp.csv
+
+import os
+import argparse
+import shutil as st
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+import subprocess
+
+
+def copy_to_s3(source, target):
+    s3_bucket = "s3://wpl-wrk-cds-np-unzip-bucket/"
+    s3_source = f"{s3_bucket}{source}"
+    s3_target = f"{s3_bucket}{target}"
+    command = f"aws s3 cp \"{s3_source}\" \"{s3_target}\"" 
+    #print(command)
+    try:
+        #subprocess.run(['aws','s3', 'cp', f'"{s3_source}"', f'"{s3_target}"', '--profile cops-permset-teamadmin-109804077997'])
+        subprocess.run(command, shell=True)
+    except Exception as e:
+        print(f"{e.args[0]} : {command}")
+
+
+
+
+def process_copy_file(source_file, target_dir, target_file):
+    if target_dir == '':
+        target_dir, target_file = os.path.split(target_file)
+
+    target_file_path = f'{target_dir}/{target_file}'
+    #source_file = "./procon-hbhp-temp/9100072778/05 Communication State Transitions/211525-STRU_Untagged_FRP Products_NOV_PQ Approval Request.pdf"
+    #source_file =  "./procon-hbhp-temp/9100072778/05 Communication State Transitions/dummy_file.pdf"
+    #print(f"{source_file} | {target_file_path}")
+    source_file_exists = os.path.isfile(source_file)
+    if not source_file_exists:
+        print(f"\nSource does not exist: {source_file} | {target_file}")
+    #exit()
+    try:
+        file_exists = os.path.isfile(target_file_path)
+        #dir_exists = os.path.exists(target_file_path)
+        dir = os.path.dirname(target_file_path)
+        dir_exists = os.path.exists(dir)
+        #print(f"DIR {dir}")
+        if source_file_exists and not file_exists:
+            #print('file-does-not-exitst')
+            if not dir_exists:
+                #print('dir-does-not-exist')
+                os.makedirs(dir)
+
+            st.copy2(source_file, target_file_path)
+
+    except Exception as err:
+        print(f"\n<ERROR> {str(err)}")
+        #log.write(str(err))
+
+
+def process_copy_all(source_dir, target_dir, folder):
+    print('-- process_copy')
+    milestone   = 100
+    count_files = 0
+
+    if len(folder) > 0:
+        print(f'\n{folder} ', end="", flush=True)
+        source_dir = Path(f"{source_dir}/{folder}")
+        target_dir = Path(f"{target_dir}/{folder}")
+
+    for root, _, filenames in os.walk(source_dir):
+        #print(filenames)
+        for filename in filenames:
+
+            if count_files % milestone == 0:
+                print("♦", end="", flush=True)
+
+            file_path = os.path.join(root, filename)
+            #print(file_path)
+            common_path = root.replace(str(source_dir),'')
+            target_dir_path = f'{target_dir}{common_path}'
+
+            process_copy_file(file_path, target_dir_path, filename)
+
+            count_files += 1
+
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser .add_argument("-f", "--CsvFile", help="csv file name")
+    parser .add_argument("-c", "--ContainerName", default = "UAT GCMS Load", help="Top folder name")
+    parser .add_argument("-test", "--TestRun", default = "NO", help="Test by picking up the first record YES/NO")
+    args = parser.parse_args()
+    filename = args.CsvFile
+    container = args.ContainerName
+    testrun = (args.TestRun=="YES")
+
+
+    #print(f"-- Copy files source:{filename} to:{container} --")
+    #print(f"-- Copy files source:{filename} to S3 --")
+    milestone = 10
+    bulk_copy = False
+    csv_file = f'./{filename}'
+
+    source_root = './gcms-load-2/documents/wseusr_2/wessp/store/01490/'
+    target_root = f'./gcms-migrated/documents/{container}/'
+    log = open("copy_file_error.log", "a")
+
+    xls_file = './do-not-use.xlsx'
+    use_excel = False 
+    # use for bulk copy only
+    source_dir = Path('./gcms-load-2/documents/wseusr_2/wessp/store/01490/142517/228514/contractfsbuyer/2006747/')
+    target_dir = Path('./gcms-migrated/documents/')
+    #print(f'SOURCE: {source_dir}\nTARGET: {target_dir}')
+    folder_list = ['']
+
+    proc_starttime = datetime.now()
+    print(f'\nProcess started  at: {proc_starttime.strftime("%Y-%m-%d %H:%M:%S")}')
+
+    if bulk_copy:
+        for folder in folder_list:
+            print(folder)
+            #process_copy_all(source_dir, target_dir, folder)
+    else:
+        # copy files using a list from csv or excel file
+        if use_excel:
+            mapping_df = pd.read_excel(xls_file,"Sheet1")
+        else:
+            mapping_df = pd.read_csv(csv_file)
+
+        count_row = 0
+        mapping_df = mapping_df.reset_index()
+        for idx, row in mapping_df.iterrows():
+            #source_file_path = f"{source_root}{row['SourceFilePath']}"
+            #target_file_path = f"{target_root}{row['TargetPath']}"
+            source_file_path = f"{row['SourceFilePath']}"
+            target_file_path = f"{row['TargetFilePath']}"
+
+            #source_file_path = source_file_path.replace('jaggaer-gcms-extract/wseusr/wessp/store/01490/','gcms/')
+            #print(f"{source_file_path} | {target_file_path}")
+            #process_copy_file(source_file_path,'', target_file_path)
+
+            if count_row >= 0:
+                print(count_row, end=' ', flush=True)
+                #copy_to_s3(source_file_path,target_file_path)
+                #process_copy_file(f"./{source_file_path.replace('procon-hbhp-extract','procon-hbhp-temp').replace('scripts/','')}", './procon-hbhp-blob', target_file_path.replace('load-to-blob/',''))
+                process_copy_file(f"./{source_file_path}", "", f"./{target_file_path}")
+
+
+
+            count_row += 1
+            #for test only
+            if testrun and count_row >= 1:
+                print(f"{source_file_path} | {target_file_path}")
+                print("\nTest run is complete.")
+                exit()
+
+    proc_endtime = datetime.now()
+    print(f'\nProcess finished at: {proc_endtime.strftime("%Y-%m-%d %H:%M:%S")}')
+    print(f"Total time {proc_endtime-proc_starttime}")
+    log.close()
