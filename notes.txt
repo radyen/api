@@ -1,0 +1,1346 @@
+S3 Bucket: wpl-wrk-cds-np-unzip-bucket
+EC2: i-0919ad5bc3ee1ee57 (jc-unzip-files-instance-for-rady-no-associated-terraform)
+
+S3 FOR SNOWFLAKE ARCHIVE
+s3://wpl-wrk-datawfm-nonprod-iclms/archive/
+
+aws configure sso
+https://d-976710a35d.awsapps.com/start/#
+ap-southeast-2
+
+---------------------------------------------------
+
+CLMS - Contract Lifecycle Management System
+
+
+
+BHP PROCON API:
+
+
+
+
+NDS document (completed)
+
+Timesheet code: P0-000217-01-1-01   CLMS / iCertis Project  (confirmed with Jon)
+
+\\wde.woodside.com.au\Shares\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\original
+
+
+https://confluence.woodside.com.au/display/NCDS/CLMS+-+Contract+Lifecycle+Management+System
+https://confluence.woodside.com.au/display/NCDS/CLMS+-+High+Level+Design+and+Estimation
+https://confluence.woodside.com.au/display/NCDS/CLMS-Detail+Design
+
+
+?? still no access 25/3/2024
+Snowflake access to PROJECT_ICLMS schema ( request was sent to Ramalingam, Pons (PAXUS AUSTRALIA PTY LTD) <PONS.RAMALINGAM@woodside.com> 20/3/2024 )
+project_iclms.procon_exract 
+project_iclms.GCMS
+
+
+GIT access to Woodside/EDP_CLMS repo
+
+
+Sharepoint access to 
+https://woodsideenergy.sharepoint.com/sites/ProConHWELDocuments
+https://woodsideenergy.sharepoint.com/sites/ProConHBHPDocuments
+
+https://woodsideenergy.sharepoint.com/sites/S4HUAT
+
+GCMS_FILES_MIGRATED
+
+
+N:\WDE\notbackedup\scratch\BK_EXTRACT\GCMS_FILES
+
+
+?? still no direct access 25/3/2024 
+-- direct access to these sharepoint location is not required as long the powerautomate script can move file successfully (using service account)
+
+SOURCES:
+https://woodsideenergy.sharepoint.com/sites/BrowseContractsProcurement
+https://woodsideenergy.sharepoint.com/sites/CorporateContractsPortfolio lost access
+https://woodsideenergy.sharepoint.com/sites/CPNEWENERGY
+https://woodsideenergy.sharepoint.com/sites/CPOperationsandBrownfields
+https://woodsideenergy.sharepoint.com/sites/DCContracting
+https://woodsideenergy.sharepoint.com/sites/DigitalContractsandProcurement
+https://woodsideenergy.sharepoint.com/sites/ExplorationContractsProcurement
+https://woodsideenergy.sharepoint.com/sites/LogisticsCP
+https://woodsideenergy.sharepoint.com/sites/PlutoTrain2ContractsProcurement
+https://woodsideenergy.sharepoint.com/sites/ProConHWELDocuments   
+https://woodsideenergy.sharepoint.com/sites/SangomarCP662
+https://woodsideenergy.sharepoint.com/sites/SangomarSSPL438
+https://woodsideenergy.sharepoint.com/sites/ScarboroughCP
+https://woodsideenergy.sharepoint.com/sites/SNEFPSOFEED  
+
+Waiting approval for Service Account to be added
+https://woodsideenergy.sharepoint.com/sites/SSPLCP
+https://woodsideenergy.sharepoint.com/sites/GWSSupplyChain
+https://woodsideenergy.sharepoint.com/sites/CorporateContractsPortfolio
+
+
+Sharepoint Targets:
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationCorporateProd
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationGlobalProjectsProd
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationGlobalWellsSeismicandExplorationProd
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationNewEnergyTechnicalServicesProd
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationOperationsProd
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationOthersProd
+
+
+IM_GlobalWellsSeismicandExplorationProd_Equipment
+IcertisMigration_NewEnergyTechnicalServices_Prod_Technical_Services
+IcertisMigration_NewEnergyTechnicalServices_Prod_New_Energy
+IcertisMigration_Operations_Prod_Logistics
+IcertisMigration_Operations_Prod_Plant_and_Equipment
+IcertisMigration_Operations_Prod_Implementation_Serv
+IcertisMigration_Operations_Prod_Other
+
+
+
+
+
+
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationOperationsProd/Logistics/Framework/4610003790_FUGRO AUSTRALIA PTY LTD/FA_Parent/M002_Amendments and Variations/Amendments
+
+
+
+iCertis expected go live on May 2024
+
+https://supplierportal.bhp.com/esop/bhp-host/public/web/login.jst
+
+Service account:
+cs.svc.iclmsmigra@woodside.com.au
+4dW63z2ZLU79zxz0xGCPZCrMAm7qm1
+
+C:\Users\W77176\Woodside Energy Ltd\IcertisMigration_Corporate_Prod - Corporate Affairs
+
+This Service Account is owned by the Icertis CLMS Migration project. 
+Please refer to the email we sent to you on 12/9/2024 (request for approval: access to sharepoint location).
+
+
+
+
+
+APIs:
+
+HWEL:  https://perapp855.wde.woodside.com.au/proconRestApi/procon/v1/
+HBHP:  https://woodside.crm.connect.aveva.com/proconRestApi/procon/v1/
+
+BK creates user fro hWEL front-end
+hbhp, jon need to be involved, team in houston need to do that
+
+
+HBHP PROCON user (for API) must have the following access: 
+Petroleum's Business Unit Best Practice Library 
+with Contract role as "Contract Process Owner" 
+
+
+
+N:\WDE\notbackedup\scratch\BK_EXTRACT
+
+
+
+References:
+https://woodsideenergy.sharepoint.com/sites/iCLMS/Icertis%20Key%20Documents/What's%20Changing%20Series/Woodside%20Project%20iCLMS_Intro%20to%20What's%20Changing.pdf
+
+
+
+SQL:
+
+SELECT * FROM SANDBOX.INFORMATION_SCHEMA.TABLES 
+WHERE table_schema  LIKE '%PROCON%'
+
+
+
+https://woodsideenergy.sharepoint.com/:f:/r/sites/ProConHWELDocuments/Other/TestOnlyRE?csf=1&web=1&e=ea7B99
+
+
+
+GCMS - Site Setting - Storage Metrics
+https://woodsideenergy.sharepoint.com/sites/JaggaerGCMSExtract/_layouts/15/storman.aspx
+
+https://woodsideenergy.sharepoint.com/sites/JaggaerGCMSExtract
+ 
+Remove the old compressed files e.g. GCMS_Source_File_Ex2 once the new source source files arrived.
+Do clean up at the end of project.
+
+
+
+
+
+PowerAutomate > My Flows
+https://make.powerautomate.com/environments/Default-a3299bba-ade6-4965-b011-bada8d1d9558/flows
+
+PROCON:
+
+
+Following are the  contacts for procon support (if required)
+
+Ryan.McClements@aveva.com
+andrew.brown@aveva.com
+contractriskmanagementsupport@aveva.com
+
+
+
+
+
+
+
+01 Create folder (and subfolders) for additional contracts
+- Received a file (excel) that contains a list of new sharepoint folders for additional contracts.
+- Use N:\WDE\notbackedup\scratch\RE_EXTRACT\Secured\PowerShell
+- 1_Others 2_ ,3_, 4_, 5_
+--- update FolderStandalone.csv and FolderInputsOld.csv (remove existing rows and replace with the new information)
+--- put the file into respective C:\Icertis_folder_creation\Code\Others\
+--- for the following steps, process one entry first to make sure the result is correct before continue with the rest.
+--- run CreateNestedFolders_Old
+--- run CreateNestedFolders
+--- Verify parent folder and childs have been created correctly
+
+02 Process
+
+
+
+03 Process Load 3 (extract type: PH3_HWEL)
+- Befor running the python scripts, review the following:
+--- the connection_info.py 
+--- get the API key if required
+--- parameters stored in the excel file: API_INFO.xlsx
+
+
+
+
+- Run python script located in C:\Users\W77176\git\clms\1_hwel . Follow the sequence.
+
+
+PROCON GCMS -----------------------------------------------------------------------------------------------
+1.run contract1(upto 16,yellow)
+2. run access
+3. DELETE ALL records related TO extract_type = 'PH3_HWEL' FROM PROCON_EXTRACT AND procon_log
+4.run contract2 (ALL,)
+
+
+
+GCMS ------------------------------------------------------------------------------------------------------
+
+01 Process the Unstructured Data (Document files)
+- Create a shared folder in N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_FILES
+- Set folder's READ and EXEC permission to the following users (add any new user(s) before copying files:
+--- Adebaa Yusuf, Geoff Kellie, Devan Conry
+- Sync the sharepoint where the files are located, for example: https://woodsideenergy.sharepoint.com/sites/JaggaerGCMSExtract/GCMS_Source_File_Ex2/Forms/AllItems.aspx
+- The sync drive will appear in the local machine showing all the available files, for example: 
+C:\Users\W77176\Woodside Energy Ltd\Jaggaer GCMS Extract - GCMS_Source_File_Ex2
+
+- The next process should be done once at a time for all compressed files :
+--- Highlight one file, right click, select the "Always keep on this device". This will copy the from One Drive to local.
+--- Once done, stop the Sync (use OneDrive setting). This to release some reserved storage.
+--- Copy the file from local to the network drive: 
+	N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\original 
+
+- Use Virtual Machine to unzip the compressed files. 
+	Put the 1st stage extract files to:
+	- N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\uncompressed 
+	Put the 2nd stage extract files to:
+	- N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_FILES
+
+02 Process the Structured Data (CSV)
+- Download the zip file from sharepoint 
+- Unzip the file and put the outcome into C:\Users\W77176\git\clms\3_GCMS\source_files
+- Check the following before running the python script: 
+--- information in connection_info.py are correct
+--- Confirm with Geoff that existing Snowflake GCMS tables will be dropped.
+- Run gcms_source_files_load.py 
+- Verify the Snowflake tables have been created.
+
+03 Inform users that GCMS file are available in the Snowflake and Network location.
+
+04 Get the file list 
+- Run the gcms_get_file_list.py
+- Load csv output to Snowflake temp table
+- Run SQL query in clms_misc_script.sql to generate a list of file full path and Levels
+
+
+
+
+GCMS (proposed process change):
+ 
+
+Command Line:
+7z x 
+
+N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\test>
+copy /B wseusr2.tar.gz.* "N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\original\tar-copy\combined.tar"
+
+
+
+\\wde\shares\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\test
+\\wde\shares\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\original\tar-aus\wseusr2.tar
+resume:
+"C:\Program Files\7-Zip\7z.exe" x "N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\test\wseusr2.tar.gz.part-aa" -o"WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\original\tar" -aos -y
+
+Extract specific file:
+tar -xvf N:\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_Source\UnStructured\test\wseusr2.tar.gz.part-aa -C C:\Temp\tar\out\ "wseusr_2/wessp/store/01490/142517/268412/contractfsbuyer/2192351/2325538-Woodside 2024 Stop Loss App - Signed.pdf"
+
+tar -xvf C:\Temp\ChemAlert.tar.gz -C C:\Temp\tar\out\ "ChemAlert/StockRegisterBySite/out/Chemalert_StockRegisterBySite_1.json"
+
+
+tar -cvf sample_combined.tar file1.gz file2.gz file3.gz
+gzip newcombined.tar
+
+
+tar -cvf sample_combined.tar sample.tar.gz.001.gz sample.tar.gz.002.gz sample.tar.gz.003.gz
+gzip sample_combined.tar
+ 
+
+S4HANA ----------------------------------------------------------------------------------------------------
+
+merging 3 gz files total 5GB less than 30 sec 
+
+
+
+
+
+
+
+tar -xvf 
+
+
+AZURE Storage Explorer:
+
+Display Name:
+icmlegacyupload-1 (SAS)
+URL:
+https://imtwdutstrprmry.blob.core.windows.net/icmlegacyupload
+Type:
+Blob Container
+HNS Enabled:
+false
+SAS:
+si=legacyupload&spr=https&sv=2022-11-02&sr=c&sig=OpEDFUvnuLWaaw0NBJSG%2FYSJ43AwGynRf5jjKF1vgKM%3D
+
+
+
+. .localenv/Scripts/activate
+python data_validation.py clms_load_mapping_file --loadready --transform -s no
+
+HBHP PROCON%
+
+1. Generate API Key using front-end UI.
+2.
+
+
+python cherrypick.py -m clms_supplier -p loadready -r 03_profile_compare_base.yaml -i report
+python cherrypick.py -m clms_supplier -p loadready -r 06_registration_input_output.yaml -i report
+python cherrypick.py -m clms_supplier -p loadready -r 06_registration_input_output.yaml -i report
+
+
+[ 0418950875] -> 418950875
+
+[ 
+000000000
+000000000
+
+\\wde.woodside.com.au\Shares\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_FILES_2\wseusr\wessp\store\01490Contract\142517\156736\contractmcdproposal\5\BHP Commercial Agreement 910000129 2 - signed.pdf
+
+\\wde.woodside.com.au\Shares\WDE\notbackedup\scratch\RE_EXTRACT\GCMS_FILES_2\wseusr\wessp\store\01490\Rfx\142517\rfq_35871\282325\280976\rfxcommquestion\1078976\Woodside Trion RFQ 2897_Dril-Quip Commercial Update 05-26-2023.zip
+
+
+
+https://wpl-wrk-cds-np-unzip-bucket.s3.amazonaws.com/gcms-archive/copy_files.py?AWSAccessKeyId=ASIARTEGVIOWYD6X55E5&Signature=SlyzxRq%2FWj9lVZs3xR4rYpOovyE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEUaDmFwLXNvdXRoZWFzdC0yIkcwRQIhALG4HbCdbc1jyOVUB7a1SbapYiLtH1phozPk3nTQKt6fAiBSPaZ%2FFXsLy5ZDJJGUw63ifEGIYRjo1yLEgjITgacT2CqUAwiO%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDEwOTgwNDA3Nzk5NyIMYPkGix6LTObOt9fnKugCHpH4y3xfS8rUWK5vMd93cvdKSlxDLomq%2B5F%2B9SyjbCkR0IHIFHJZmMJ82K0OEqF16O5V7nnf49KleqTWZ7bBlb2czWIRlFSthLRPiRoHlnnhNSXxx%2BJTficooJRXKCfHrXgk22yv9PIJBaysPM%2B9g%2BGZjmB6iY0POxXaSX8%2F1AnSlK5h3xmCl9PmvPoBwul0rKGLfDhi9pcWBG6uC6UmF4P7aoBygKQs8JWggRZUnt%2BdznAq9l5ch6p61kcmUC5uPtMbLYNGFxbU%2Fq%2BMx5Zc4ndXlX2SckESTw%2FNg5Rmeo20pFP0ZHnU0VPW9XBqR5WB2kx1eoEhAJ%2B%2B3ccSCeiseWU7iuS7AZFHnZivwdXgg57gcgn2eT%2BE93siFUyybtYID7uNgU29V13xelJHCbmGk%2F7AKk7w%2Fa69OqsaK3AjaQl3EHhXMyDGl8hzssjl7%2FUfxu49Rj5HyB3lsQXNIQ1JryPCEutHnCCiMIiIpLEGOqYBMQJ6lxa2VIcVmYexoVWi2BLGldgopRKAsm0I76Xol2IeFMpARsqTSf4UvLm4bsJ1yu085b%2F5S8vbKe4g%2Byo5et3%2FIJjhreNQLwjqHtE6Uhquz%2FeXPykkxSRDM4w%2BDLhGYql0LbNE6ST5AulSWzrdg7eb9en7I5%2FE1d2OjFX5YdykcRKWy9ujmwUd%2FxW6O%2FI2w2YDHO4Gnpo3LIsU6LvnHNJO%2FN1BSw%3D%3D&Expires=1723181602
+
+
+
+https://wpl-wrk-cds-np-unzip-bucket.s3.amazonaws.com/gcms-archive/copy_files.py?AWSAccessKeyId=ASIARTEGVIOWYD6X55E5&Signature=gMBK1mjblyRf660P7CUGMwex05U%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEUaDmFwLXNvdXRoZWFzdC0yIkcwRQIhALG4HbCdbc1jyOVUB7a1SbapYiLtH1phozPk3nTQKt6fAiBSPaZ%2FFXsLy5ZDJJGUw63ifEGIYRjo1yLEgjITgacT2CqUAwiO%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDEwOTgwNDA3Nzk5NyIMYPkGix6LTObOt9fnKugCHpH4y3xfS8rUWK5vMd93cvdKSlxDLomq%2B5F%2B9SyjbCkR0IHIFHJZmMJ82K0OEqF16O5V7nnf49KleqTWZ7bBlb2czWIRlFSthLRPiRoHlnnhNSXxx%2BJTficooJRXKCfHrXgk22yv9PIJBaysPM%2B9g%2BGZjmB6iY0POxXaSX8%2F1AnSlK5h3xmCl9PmvPoBwul0rKGLfDhi9pcWBG6uC6UmF4P7aoBygKQs8JWggRZUnt%2BdznAq9l5ch6p61kcmUC5uPtMbLYNGFxbU%2Fq%2BMx5Zc4ndXlX2SckESTw%2FNg5Rmeo20pFP0ZHnU0VPW9XBqR5WB2kx1eoEhAJ%2B%2B3ccSCeiseWU7iuS7AZFHnZivwdXgg57gcgn2eT%2BE93siFUyybtYID7uNgU29V13xelJHCbmGk%2F7AKk7w%2Fa69OqsaK3AjaQl3EHhXMyDGl8hzssjl7%2FUfxu49Rj5HyB3lsQXNIQ1JryPCEutHnCCiMIiIpLEGOqYBMQJ6lxa2VIcVmYexoVWi2BLGldgopRKAsm0I76Xol2IeFMpARsqTSf4UvLm4bsJ1yu085b%2F5S8vbKe4g%2Byo5et3%2FIJjhreNQLwjqHtE6Uhquz%2FeXPykkxSRDM4w%2BDLhGYql0LbNE6ST5AulSWzrdg7eb9en7I5%2FE1d2OjFX5YdykcRKWy9ujmwUd%2FxW6O%2FI2w2YDHO4Gnpo3LIsU6LvnHNJO%2FN1BSw%3D%3D&Expires=1723183462
+
+
+
+https://wpl-wrk-cds-np-unzip-bucket.s3.ap-southeast-2.amazonaws.com/gcms-archive/copy_files.py?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEYaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAM3xAbV8Xvgxpi7P3VX1LUeFCxGtZQdqr6dxPaGbkSWmAiBYumdpyIWXvZ0pzAY8tXfJQJw0l%2FZnt%2BQXim%2BcZSx9HyrkAwg%2FEAMaDDEwOTgwNDA3Nzk5NyIMOTyni5SRz6ori%2FA%2FKsEDcj%2FQmtECeJSJxrAGtiTPeXhOx%2BXN1iAe%2BsgRHeOfsFFasjJUmVja2q5QpgWMTOX2eU9I%2FAUtQ%2F%2BR6ZpcEmNbzq5sqkkUEu8rliVGaRpQj2jTKexTfbGyfY7%2Bg0mecXTnb13fVqGoG12dsfs8jjQH6wqcjRepgqOZrwZHf4LbPa5jI0UW9xW44YG3QxXH%2Bz2AR597JdFrnznnRyDbAttE3zlucrC4s4n%2BmMr%2BsawKJCcXQsE%2ByiQkV6w0xciF6MOzGBnGCg%2FLlCQDIewgRBaH7hm5%2FzearpNAhLPtTrxzdWNNGeVMI%2BRBJKyxj1tQhOURUnYDsPg9z0zwEnivn4bpHlDm7fc8eS3NaRAcaXhdf0c3M7tYFAEkUAyLQzJ%2BukQwRmXtnJFdrsPYM8r7RXzMeXMfNVMd5C1KoE9ECBCcIE4ZrOVku1pWpavUGbPF0VYollhq6beOX3fO4iC1enDrY03P7mbmytnuPvtfGrah7ggcxSBrxcw%2Bb4lIDS0%2FLtuNFJsqbVntoz2mC5go%2BEz22JD45f7Rijjt9BE1lQFzHY7flrdD0nIek36%2FCBRDkUKM3wmC%2F%2BocU1QSBAXynPHSDSYwnN%2FWtQY6lAIj6nDkw31kIgeUSGt4IE9kEoOvOnll9MqtnteuOT2ghLXEhhIXxNDJr5ZI%2BJkNVuqs23dcA4DDrFy%2FR6qH%2Bhj2phZ%2BIpDzm%2BoRbY6t%2F0Y%2FXFfcsXTeogJbXYv8W2lwyNl8h%2FG3GsWoJEvOA4Og%2Bx84JAroHPOTJRmieVNsy0U8EHvBzjL8cAeZDCO1B%2FIcfChH1uMQ05AYZbTx1mtQbilo69xOMtSkgJXeFvxKPtGuC0rOfcbEPp6H6tWfcGfFY9Gve6ah8HAFsbEX%2FhH3hXljea9Augo%2BvTurk6IjMaEz%2BMUeuejy8zcaJBde%2FM%2F9LU8yHY4sVpjHtHJD%2Bs9685oc4gjMqp%2BG4WZeEv1rIyy29B6800E%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240809T055717Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIARTEGVIOW56F3ZFUF%2F20240809%2Fap-southeast-2%2Fs3%2Faws4_request&X-Amz-Signature=a63feab0ff8ed373745d94b2810eee9985ac62a60d31527cf3bd793ac9946bb3
+
+
+
+python copy_rename_files.py -f "C:\Temp\clms\MHH_File_Mapping.xlsx" -s "C:\Users\W77176\Woodside Energy Ltd\Icertis CLMS Upgrade Project (external) - MHH Deed files" -t "N:\WDE\notbackedup\scratch\RE_EXTRACT\MHH_FILES_NEW"
+
+
+https://woodside.crm.connect.aveva.com/proconRestApi/procon/v1/files/171630
+
+
+
+-------------------------------------------
+
+CLMS / iCertis Project
+
+
+•	Username: RADYNR - 9j09j@zSF01•	Dedicated Login URL: https://ttutiaa-ib46807.snowflakecomputing.com 
+
+
+
+python cherrypick.py -m governance_reports -p postload -r S4_MARC_MRP_HWEL.yaml -i report
+
+hWEL Clone (PE0):          sapgui s46devap01.saps4.np.woodside
+9j09j@zWoodside
+
+
+\\saps4-np-fsx-migration.wde.woodside.com.au\share\DM\Reconciliations\PRD_CUTOVER\WIL\02. Data Validation\material_master_hWEL\POSTLOAD reports
+\\saps4-np-fsx-migration.wde.woodside.com.au\share\DM\ACO\ALL\S4_TABLES
+
+python data_validation.py material_master_hWEL_s4 --postload -s no
+
+
+python data_validation.py governance_reports --postload -s no
+
+python -m pip show pywin32
+
+python excel_to_table.py -f "data_load\MVKE.xlsx" -s "Sheet1" -h 0 -r "A:C" -t "s4_mvke"  
+
+python excel_to_table.py -f "MDUB_27032024.xlsx" -s "Sheet1" -hr 0 -r "A:BA" -t "s4_mdub"
+
+UPDATE LOAD_VAL_WEL.s4_MDUB
+SET MATNR = LPAD(MATNR18'0')
+
+python cherrypick.py -m material_master_hWEL -p postload  -r MM_STOCK_OUT_HWEL.yaml -i report
+
+
+
+7zip setup environment path
+
+set PATH=%PATH%;C:\Program Files\7-Zip\
+
+-- original source from overlap script
+SELECT * FROM LOAD_VAL_WEL.OVERLAPS_MATNR GROUP BY LEGACY_ORG
+HBHP:	32577
+HWEL:	22262
+
+-- extended views incl all material
+SELECT * FROM LOAD_VAL_WEL.S4_MATERIAL_CONV_VW GROUP BY SOURCE_SYSTEM
+
+SELECT *  FROM LOAD_VAL_WEL.S4_MATERIAL_CONV GROUP BY SOURCE_SYSTEM
+
+python data_validation.py product_master_hWEL --postload
+
+python data_validation.py material_master_hBHP_cda --postload
+
+
+Stock Out Report
+MARC Material Not in SALES (MVKE) Report
+
+python data_validation.py material_master_hWEL --loadready
+python data_validation.py material_master_hWEL --preload
+python data_validation.py material_master_hWEL --postload
+
+python data_validation.py material_master_hBHP --construct -t
+python data_validation.py material_master_hBHP --loadready
+
+python data_validation.py material_master_hBHP --preload
+
+python data_validation.py open_po_hWEL --preload
+
+ALTER SEQUENCE LOAD_VAL_WEL.data_validation_id_seq RESTART WITH 40000000 INCREMENT BY 10; -- TC4
+
+SELECT LOAD_VAL_WEL.data_validation_id_seq.NEXTVAL FROM DUMMY;
+
+ALTER USER <your_wopid> PASSWORD "<your_new_password>"
+
+assignee = 6417a79d67102fc717c091a9 AND statusCategory = "To Do" AND "Epic Link" = PK-22763 AND "Functional Area[Dropdown]" = "WIL Data Team"
+
+
+python data_validation.py material_master_hWEL_s4 --postload
+
+\\saps4-np-fsx-migration.wde.woodside.com.au\share\DM\TC4\LO\Characteristics Value Assignment\EXT\hWEL
+
+
+https://dcx.sap.com/sa160/en/dbreference/dummy-system-table.html
+
+-- FOR DEMO --
+
+VALIDATION-hWEL-MM-POSTLOAD-title
+
+C:\Users\W77176\git\data-keystone-validation\.localenv\Scripts\activate.bat
+
+python data_validation.py material_master_hWEL --preload
+
+python data_validation.py inventory_balance_hWEL --construct
+python data_validation.py inventory_balance_hWEL_IM --preload 
+
+
+
+Sharepoint folder:
+C:\Users\W77176\Woodside Energy Ltd\Project Keystone (External) - 02. Data Validation\material_master_hWEL
+
+Data Validation FW config folder:
+C:\Users\W77176\git\data-keystone-validation\models
+
+SELECT dv.data_object dv.validation_name COUNT(*) AS ERROR_COUNT 
+--SELECT count(*)
+FROM LOAD_VAL_WEL.DATA_VALIDATION_LOG dv
+WHERE dv.data_object = 'Material Master'
+AND dv.VALIDATION_RUN_ID IN (
+	-- the latest run id
+	SELECT lv.VALIDATION_RUN_ID
+	FROM LOAD_VAL_WEL.DATA_VALIDATION_LOG lv
+	WHERE  lv.DATA_OBJECT  = dv.data_object 
+	AND lv.CREATED_TIMESTAMP = 
+		(SELECT MAX(CREATED_TIMESTAMP) 
+		FROM LOAD_VAL_WEL.DATA_VALIDATION_LOG 
+		WHERE data_object = lv.data_object)
+)
+GROUP BY dv.data_object dv.validation_name dv.VALIDATION_RUN_ID
+ORDER BY dv.data_object dv.validation_name ;
+
+
+/*
+DELETE FROM LOAD_VAL_WEL.DATA_VALIDATION_LOG dvl
+WHERE data_object = 'Material Master'
+*/
+
+
+-- CLEAN
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\Material Master\overlaps\delta_final-20230424" -a append
+
+-- RAW
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\Material Master\overlaps\original-raw-20230427" -a append
+
+------------------------------------------------------------
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\Woodside Energy Ltd\Project Keystone (External) - 01. Input files for Data Construct (1)" -a replace -sep tab
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad\archived\RUN" -a replace -sep tab
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad" -a replace -sep tab
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\Material Master\MAP" -a replace
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\Material Master\overlaps\FINAL" -a append
+
+C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\Material Master\overlaps\original-raw-20230427
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad\sources\DR" -a replace
+
+
+
+python cherrypick.py -m material_master_hBHP -p postload -r MM_Inventory_01_POST_HBHP.yaml -i report 
+python cherrypick.py -m material_master_hBHP -p preload  -r MM_Inventory_01_HBHP.yaml -i report 
+
+
+
+python cherrypick.py -m material_master_hWEL -p construct -r MM_DEDUP_01_overlaps_types.yaml -i report 
+
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\Woodside Energy Ltd\Project Keystone (External) - 01. Input files for Data Construct (1)" -a replace
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\JIRA\PK-23907 DEFECT-2855" -a replace
+
+python csv_to_table.py -s W77176 -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad\archived\RUN\MM_HBHP_DEFECT_2902.csv" -a replace
+ 
+
+
+SAP:
+Initiative ID: DIG-3688
+WBS Code: P0-000242-1A-1-40
+
+Project Keystone - ERP S4 HANA Upgrade
+
+
+ad02306.ap-southeast-2
+
+
+python -m pip install mitmproxy
+
+pip freeze > requirements.txt
+
+python -m pip install pipreqs
+pipreqs C:\Users\W77176\git\playground
+
+GIT
+git config --global user.name "Rady Endrasmoro"
+git config --global user.email rady.endrasmoro@w
+git config --global core.editor "code --wait"
+git config --global -e
+git config --global core.autocrlf true
+
+git config -h
+
+
+git rebase origin/master
+
+
+
+
+create a new repository on the command line
+echo "# test-project" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/radyen/test-project.git
+git push -u origin main
+
+
+push an existing repository from the command line
+git remote add origin https://github.com/radyen/test-project.git
+git branch -M main
+git push -u origin main
+
+
+git checkout -b feature/validation_report
+git push --set-upstream origin feature/material_master_01
+git push --set-upstream origin feature/standalone_utilities
+git push --set-upstream origin feature/mm_hwel_20230607
+
+R14#56refe397845
+
+git push --set-upstream origin feature/mm_hbhp_post_marc
+
+
+
+it branch fb
+git checkout fb
+git reset origin/main --hard
+
+Or do all of that in a single command:
+
+git checkout -b FB origin/main
+
+git checkout -b feature/mm_files_cleanup origin/master
+git push --set-upstream origin feature/mm_loadready_20230615
+git push --set-upstream origin feature/mm_preload_20230615
+git push --set-upstream origin feature/mm_postload_20230615
+git push --set-upstream origin feature/mm_files_cleanup
+git checkout -b feature/mm_hbhp_marc03_fix origin/master
+git push --set-upstream origin feature/mm_hbhp_marc03_fix
+
+git checkout -b feature/mm_postload_20230620 origin/master
+git push --set-upstream origin feature/mm_postload_20230620
+
+git checkout -b feature/mm_hbhp_mr21_update origin/master
+git push --set-upstream origin feature/mm_hbhp_mr21_update
+
+git checkout -b feature/mm_hbhp_marc02_update origin/master
+git push --set-upstream origin feature/mm_hbhp_marc02_update
+
+
+git checkout -b feature/mm_load_ref_tables origin/master
+git push --set-upstream origin feature/mm_load_ref_tables
+
+git checkout -b feature/mm_overlaps_delta origin/master
+git push --set-upstream origin feature/mm_overlaps_delta
+
+git checkout -b feature/ib_pk_23335 origin/master
+git push --set-upstream origin feature/ib_pk_23335
+
+git checkout -b feature/ib_pk_23327 origin/master
+git push --set-upstream origin feature/ib_pk_23327
+
+git checkout -b feature/ib_pk_23269 origin/master
+git push --set-upstream origin feature/ib_pk_23269
+
+git checkout -b feature/mm_hwel_split_valuation origin/master
+git push --set-upstream origin feature/mm_hwel_split_valuation
+
+git checkout -b feature/mm_hbhp_marc3_zers1 origin/master
+git push --set-upstream origin feature/mm_hbhp_marc3_zers1
+
+
+git checkout -b feature/mm_hbhp_defect_1935 origin/master
+git push --set-upstream origin feature/mm_hbhp_defect_1935
+
+
+git checkout -b feature/mm_hbhp_mr21_pre_post_01 origin/master
+git push --set-upstream origin feature/mm_hbhp_mr21_pre_post_01
+
+
+git checkout -b feature/mm_remove_white_space origin/master
+git push --set-upstream origin feature/mm_remove_white_space
+
+
+git checkout -b feature/mm_dedup01_report origin/master
+git push --set-upstream origin feature/mm_remove_white_space
+
+git checkout -b feature/mm_overlaps_custom_report_fix origin/master
+git push --set-upstream origin feature/mm_overlaps_custom_report_fix
+
+git checkout -b feature/mm_hbhp_source_plants_chg01 origin/master
+git push --set-upstream origin feature/mm_hbhp_source_plants_chg01
+
+git checkout -b feature/mm_hbhp_hibe01_pre_post origin/master
+git push --set-upstream origin feature/mm_hbhp_hibe01_pre_post
+
+
+git checkout -b feature/s4_config_ewm_uom_cmp origin/master
+git push --set-upstream origin feature/s4_config_ewm_uom_cmp
+
+
+
+git checkout -b feature/mm_check_changes_20230726 origin/master
+git push --set-upstream origin feature/mm_check_changes_20230726
+
+
+git checkout -b feature/mm_cross_docks_activation origin/master
+git push --set-upstream origin feature/mm_cross_docks_activation
+
+
+git checkout -b feature/mm_s4_material_conv_view origin/master
+git push --set-upstream origin feature/mm_s4_material_conv_view
+
+git checkout -b feature/mm_fix_total_count origin/master
+git push --set-upstream origin feature/mm_fix_total_count
+
+git checkout -b feature/mm_serial_num_check/master
+git push --set-upstream origin feature/mm_serial_num_check
+
+git checkout -b feature/mm_resb_eam_checks/master
+git push --set-upstream origin feature/mm_resb_eam_checks
+
+
+git checkout -b feature/mm_marc_06_lr/master
+git push --set-upstream origin feature/mm_marc_06_lr
+
+git checkout -b feature/long_text_validations/master
+git push --set-upstream origin feature/long_text_validations
+
+
+git checkout -b feature/IBIM_HBHP_preload_checks/master
+git push --set-upstream origin feature/IBIM_HBHP_preload_checks
+
+git checkout -b feature/IBEWM_HWEL_preload_checks/master
+git push --set-upstream origin feature/IBEWM_HWEL_preload_checks
+
+git checkout -b feature/MM_custom_reports_20230824/master
+git push --set-upstream origin feature/MM_custom_reports_20230824
+
+
+git checkout -b feature/IBEWM_HWEL_cons_stock/master
+git push --set-upstream origin feature/IBEWM_HWEL_cons_stock
+
+git checkout -b feature/IBEWM_HWEL_loadready_stock_in_transit/master
+
+
+git checkout -b feature/IBIM_HWEL_serial_number/master
+git push --set-upstream origin feature/IBIM_HWEL_serial_number
+
+
+git checkout -b feature/MM_HWEL_MARC_03_report_chg/master
+
+git checkout -b feature/IBIM_HWEL_HBHP_check_updates/master
+
+IB EWM HBHP initial validation script
+ERRORS
+SSMS:
+The server principal "WOODSIDE\W77176" is not able to access the database "DW_INT" under the current security context.
+
+python cherrypick.py -m material_master_hBHP -p loadready -r MM_MARA_09_LR_HBHP.yaml -i report
+
+python cherrypick.py -m material_master_hWEL -p loadready -r MM_MARC_03_CLN.yaml -i report
+
+python cherrypick.py -m inventory_balance_hWEL -p construct -v IBEWM_CONS_check_stock_in_transit_qty.sql -i log
+
+# check proxy
+netsh winhttp show proxy
+
+
+http://proxy-ap-southeast-2.ops.prd.woodside:8080
+http://proxy-ap-southeast-2.ops.prd.woodside:8080
+http://proxy.wde.woodside.com.au:8080
+
+https_proxy - http://proxy-ap-southeast-2.ops.prd.woodside:8080
+https_proxy - http://proxy-ap-southeast-2.ops.prd.woodside:8080
+
+10.230.38.133
+
+
+Right-Usr-AP-Github-CDS-Developer-U-GS	Github access controlled to CDS Repos
+Right-Usr-CS-SSUD.Prod.Read-U-GS	READ Only access to PROD Internal data via SSUD API
+Right-Usr-AP-Github-Woodside-U-GS	AD group access controlling main woodside Github account
+
+Right-Usr-CS-SSUD.Prod.Read-U-GS	READ Only access to PROD Internal data via SSUD API
+Role-Adm-Velocity.cdsssud.prd-prod-internal-U-GS	AWS Role to access SSUD PROD internal Data through the console
+Role-Adm-Velocity.cdsssud.np-svcdev-internal-U-GS	AWS Role to access SSUD NP - SVCDEV internal Data through the console
+Role-Adm-Velocity.cdsssud.np-svcqa-internal-U-GS	AWS Role to access SSUD NP - SVCQA internal Data through the console
+
+
+https://www.linkedin.com/in/endrasmoro
+
+
+Access to HANA DB 
+HDBDEV004B.saps4.np.woodside
+32013
+
+W77176
+a8Hy35h^Q#uz
+
+
+python excel.py -w W77176 -p a8Hy35h^Q#uz
+
+S4_CONFIG_SPARE_PARTS_CLASS_CODE_PLANT_BHP
+python cherrypick.py -m material_master_hBHP -p postload -r MM_DEFECT-3376_POST_HBHP.yaml -i report
+
+python cherrypick.py -m material_master_hBHP -p postload -r MM_Inventory_01_POST_HBHP.yaml -i report
+
+
+python cherrypick.py -m [object_folder] -p [process] -r [filename.yaml] -i report
+
+
+PYTHON IN VS CODE
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\W77176> Get-ExecutionPolicy -LIST
+
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser       Undefined
+ LocalMachine       Undefined
+
+
+PS C:\Users\W77176> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Execution Policy Change
+The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose
+you to the security risks described in the about_Execution_Policies help topic at
+https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to change the execution policy?
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"): A
+PS C:\Users\W77176> Get-ExecutionPolicy -LIST
+
+        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser    RemoteSigned
+ LocalMachine       Undefined
+
+
+PS C:\Users\W77176>
+
+
+
+GIT BASH
+cd C:/Users/W77176/git/export-to-excel
+source setup.sh
+
+python excel.py -w W77176 -p a8Hy35h^Q#uz -c stock_reconcile.yaml
+
+C:\Users\W77176\git\data-keystone-validation
+
+
+git clone -b feature/mm-transformation https://github.com/Woodside/data-keystone-validation.git
+
+
+
+python data_validation.py material_master_mara_hWEL --preload
+
+python data_validation.py inventory_balance_hWEL_IM --postload
+
+python excel.py -c MM_MARC_01.yaml
+python excel.py -c stock_reconcile_20230413.yaml
+
+
+
+
+def get_column_names(record_description):
+    """transform records description to list of table column names"""
+    column_list = []
+    for rows in record_description:
+        column_list.append(rows[0])
+    return column_list
+
+
+
+excel_report.create_excel(database_sap 'C:\\Users\\W77176\\git\\data-keystone-validation\\models\\material_master_adhoc\\preload\\report_cfg\\MM_TEST_01.yaml' 'C:\\Temp\\output')
+
+
+CREATE TABLE {{TARGET_SCHEMA_RESULTS}}.DATA_VALIDATION_LOG (
+   ....
+    CREATED_TIMESTAMP TIMESTAMP
+);
+
+
+CREATED_TIMESTAMP Timestamp DEFAULT CURRENT_TIMESTAMP
+
+
+
+cursor.execute(statement parameters)
+sqlalchemy.exc.ProgrammingError: (hdbcli.dbapi.ProgrammingError) (288 'cannot use duplicate table name: DATA_VALIDATION_LOG: line 2 col 29 (at pos 29)')
+[SQL:
+CREATE TABLE "LOAD_VAL_WEL"."DATA_VALIDATION_LOG" (
+        "DATA_OBJECT" VARCHAR(255)
+        "SUB_DATA_OBJECT" VARCHAR(255)
+        "VALIDATION_NAME" VARCHAR(255)
+        "CRITICALITY" VARCHAR(16)
+        "LEGACY_ORG" VARCHAR(5)
+        "BUSINESS_FUNCTION" VARCHAR(16)
+        "LOAD_CYCLE" VARCHAR(16)
+        "PROCESS_STEP" VARCHAR(16)
+        "ERROR_MSG" VARCHAR(255)
+        "RECMD_ACTION" VARCHAR(255)
+        "DATA_OUTPUT" VARCHAR(255)
+        "RECORD_ID" VARCHAR(32)
+        "VALIDATION_RUN_ID" VARCHAR(32)
+        "CREATED_TIMESTAMP" TIMESTAMP
+)
+
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\JIRA\PK-24380 Split Valuation\T434P.csv" -a replace
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\JIRA\PK-24380 Split Valuation\INVENTORY_VALUATED_PLANT_MAP.csv" -a replace
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\Woodside Energy Ltd\Project Keystone (External) - 01. Input files for Data Construct (1)\STANDALONE_PLANTS_BHP.csv" -a replace
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad\sources\SERNP_ALL_TEMP.csv" -a replace
+
+
+python cherrypick.py -m material_master_hBHP -p preload -v PK-22911_hBHP_PRE_MR21-02_missing_material_plant_mr21.sql -r MM_MR21_02_HBHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p postload -v PK-22912_hBHP_POST_MR21-02_missing_mr21_matnr_plant_from_marc.sql -r MM_MR21_02_POST_HBHP.yaml -i all
+
+
+MM-MR21-02-POST-HBHP-20230629044221.xlsx
+
+
+python cherrypick.py -m [object_folder_name] -p [process_name] -v [file_name.sql] -i log
+
+----- REPORT ----------------------------------------------------------------------
+
+WITH report AS (
+                  SELECT * 
+                  FROM LOAD_VAL_WEL.DATA_VALIDATION_SUMMARY
+                  WHERE LOAD_CYCLE = 'TC4'
+                  AND DATA_OBJECT = 'Material Master'
+                  AND LEGACY_ORG ='hWEL'
+                  AND PROCESS_STEP ='PRELOAD'
+)
+SELECT LEGACY_ORG PROCESS_STEP VALIDATION_NAME 
+                  SOURCE_RECORD_COUNT ERROR_COUNT ERROR_PERCENT 
+                  VALIDATION_RUN DATA_VALIDATION_ID
+FROM report WHERE DATA_VALIDATION_ID IN (
+                  SELECT MAX(DATA_VALIDATION_ID) 
+                  FROM report
+                  GROUP BY LEGACY_ORG PROCESS_STEP VALIDATION_NAME
+)
+ORDER BY LEGACY_ORG PROCESS_STEP VALIDATION_NAME DATA_VALIDATION_ID DESC;
+
+
+----- TABLE COLUMN ----------------------------------------------------------------------
+
+SELECT table_name column_name position 
+FROM table_columns 
+WHERE table_name IN (
+'TGT_4781_MM_POSTLOAD_HERS_BASIC_DATA_BKP' 
+'TGT_HBHP_4781_MM_MARA_BASIC_HERS_ENRICH'
+)
+AND schema_name = 'STG_OBJ_HBHP'
+ORDER BY table_name column_name
+
+
+SELECT ma.MTART mc.ZZS4WERKS COUNT(DISTINCT ma.MATNR) 
+FROM EXT_CLEANSED.CLN_MARA ma
+JOIN EXT_CLEANSED.CLN_MARC mc
+	ON ma.MATNR = mc.MATNR
+GROUP BY ma.MTART mc.ZZS4WERKS; 
+
+
+git checkout -b feature/mm_hbhp_tc4_changes origin/master
+git push --set-upstream origin feature/mm_hbhp_tc4_changes
+git push --set-upstream origin feature/mm_tc4_changes_2
+
+git checkout mm_hbhp_tc4_changes
+
+
+
+python cherrypick.py -m material_master_hWEL -p preload -r MM_MARA_03.yaml -i report
+python cherrypick.py -m material_master_hWEL -p preload  -r MM_MARC_01.yaml -i report
+
+python cherrypick.py -m material_master_hWEL -p preload -r DEFECT-4211-ALL_hWEL_SERNP_Blank.yaml -i report
+
+HWEL MM_Inventory-01
+LOAD_VAL_WEL.SOH_VALIDATION_MAP
+Source file: https://woodsideenergy.sharepoint.com/:x:/r/sites/ERPUpgrade/_layouts/15/Doc.aspx?sourcedoc=%7B32E7385B-D2E0-4EA8-ADB4-DC5053F461D7%7D&file=hWEL_TC3_SOH_Validation.xlsx&action=default&mobileredirect=true
+
+
+HWEL MM_MR21-02
+LOAD_VAL_WEL.LST_STOCK_VALUATION_REPORT_S4PLANT
+Source file: 
+File name - LST_STOCK_VALUATION_REPORT_S4PLANT.txt
+Location - \\saps4-np-fsx-migration.wde.woodside.com.au\share\DM\TC3\LO\Inventory Balance\EXT\hWEL
+
+
+HBHP MM_MR21-02
+LOAD_VAL_WEL.s4_config_ecc_source_plant_map_bhp
+Source file: HBHP Logistics VM File - Material Master ONLY.xlsx (tab: ECC Source Plant for Data Copy)
+
+
+
+
+python cherrypick.py -m material_master_hWEL -p postload -v PK-25031_hWEL_POST_Overlap-01_check_accounting.sql -r MM_Overlap_01_POST_HWEL.yaml -i all
+python cherrypick.py -m material_master_hWEL -p postload -v PK-25032_hWEL_POST_Overlap-02_check_sloc.sql -r MM_Overlap_02_POST_HWEL.yaml -i all
+python cherrypick.py -m material_master_hWEL -p postload -v PK-25033_hWEL_POST_Overlap-03_check_sales.sql -r MM_Overlap_03_POST_HWEL.yaml -i all
+python cherrypick.py -m material_master_hWEL -p postload -v PK-25034_hWEL_POST_MARC-09_overlaps_check_purchasing.sql -r MM_MARC_09_POST_HWEL.yaml -i all
+
+python cherrypick.py -m material_master_hBHP -p postload -r MM_Inventory_01_POST_HBHP.yaml -i report
+
+python cherrypick.py -m material_master_hWEL -p preload -v PK-23020_hWEL_PRE_MARA-07_Material_Status.sql -r MM_MARA_07_Material_Status.yaml -i all
+
+
+ 
+python cherrypick.py -m material_master_hWEL -p postload -r MM_Inventory_01_POST_HWEL.yaml -i report
+python cherrypick.py -m material_master_hWEL -p preload -r MM_Inventory_01.yaml -i report
+python cherrypick.py -m material_master_hWEL -p loadready -v PK-25030_hWEL_LR_Inventory-01_SOH.sql -r MM_Inventory_01_LR_HWEL.yaml -i all
+
+
+ 
+		  
+python cherrypick.py -m material_master_hBHP -p postload -v PK-23055_hBHP_POST_Inventory-01_SOH.sql -r MM_Inventory_01_POST_HBHP.yaml -i all
+
+
+python cherrypick.py -m material_master_hWEL -p preload -r MM_ZERS_04_status_check.yaml -i report
+
+
+python cherrypick.py -m material_master_hWEL -p postload -r MM_CROSSDOCK-01_POST_HWEL.yaml -i report
+python cherrypick.py -m material_master_hWEL -p postload -r MM_CROSSDOCK-02_POST_HWEL.yaml -i report
+python cherrypick.py -m material_master_hWEL -p postload -r MM_CROSSDOCK-03_POST_HWEL.yaml -i report
+
+
+python cherrypick.py -m inventory_balance_hWEL -p construct -r test_result_compare.yaml -i report
+python cherrypick.py -m inventory_balance_hBHP -p construct -r test_result_compare_bhp.yaml -i report
+
+
+
+python data_validation.py classes_WEG --preload
+
+python data_validation.py inventory_balance_hBHP_IM --preload
+python data_validation.py inventory_balance_hBHP_IM --postload
+
+
+
+python data_validation.py {folder_name} --{construct|loadready|preload|postload}
+python data_validation.py material_master_hWEL --loadready
+
+
+
+git checkout -b feature/IBEWM_HWEL_LR_stock_recm_update/master
+
+git checkout -b feature/MM_HWEL_LR_Marc_11_report/master
+
+
+git checkout -b feature/automatted_test/master
+
+git checkout -b feature/MM_DGIP01_checks/master
+
+git checkout -b feature/IB hWEL PRE sql fix/master
+
+git checkout -b feature/IB_hBHP_construct_checks/master
+
+
+git checkout -b feature/IB_test_compare_report/master
+
+git checkout -b feature/MM_custom_reports_20230908/master
+
+git checkout -b feature/mm_defect_4965_check/master
+
+
+python csv_to_table.py -s LOAD_VAL_WEL -f "C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\DataLoad\sources\TEST_IB_INVALID.csv" -a replace
+
+
+
+DO
+BEGIN
+
+UPDATE <table>
+SET <field> = <value>
+WHERE ...;
+
+UPDATE <table>
+SET <field> = <value>
+WHERE ...;
+
+.......
+
+END;
+
+
+python transformation.py -t raw -p full
+
+"python cherrypick.py -m material_master_hWEL -p construct -r MM_DEDUP_01_overlaps_types.yaml -i report
+
+
+
+WEL Count New Material Number : 27364 
+BHP Count New Material Number : 26985 
+
+python cherrypick.py -m material_master_hWEL -p construct -r PK-24380_SPLIT_VALUATION.yaml -i report
+
+
+git checkout -b feature/MM_defect_4678_4896/master
+
+db.run_query
+db.execute_sql_write
+db.execute_sql_write_construct
+
+
+
+
+
+ (hdbcli.dbapi.DataError) (274 'inserted value too large for column: 
+ Failed in "ERROR_MSG" column with the value \'Not all the Characteristics name and characteristic description combination exists in preload.(LEGACY_CHARACTERISTIC_NAMELEGACY_CHARACTERISTICS_DESCRIPTION).  Legacy Char Name-Value of ACTUATION_METHOD-11in sensor rodPlastic float has invalid description \'')
+ 
+ 
+ 
+ git checkout -b feature/MM_HBHP_LR_inventory/master
+ 
+ git checkout -b feature/Char_WEG_ERR_Fix/master
+ 
+ 
+ python cherrypick.py -m inventory_balance_hBHP -p construct -v IBEWM_hBHP_CONS_check_new_val_type_with_test_result.sql -i log
+
+
+git checkout -b feature/IBEWM_hbhp_const_fix/master
+
+
+Inventory Balance EWM-CONSTRUCT-Check 
+
+python cherrypick.py -m material_master_hBHP -p preload -v PK-23054_hBHP_PRE_Inventory-01_SOH.sql -r MM_Inventory_01_HBHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p preload -r MM_Inventory_01_HBHP.yaml -i report
+
+git checkout -b feature/MM_HBHP_pre_inventory_1_2/master
+
+git checkout -b feature/MM_HWEL_LR_Orphan_4/master
+
+git checkout -b feature/MM_HBHP_DR_VM_fix/master
+
+git checkout -b feature/MM_DR_Bug_fix/master
+
+git checkout -b feature/HWEL_attachment_update/master
+
+
+python excel_to_table.py -f "DAF33001164.xlsx" -s "DAF 33001164" -hr 0 -r "A:AO" -t "daf_migration_test"
+python excel_to_table.py -f "SERNP_ALL.xlsx" -s "Sheet1" -h 0 -r "A:C" -t "sernp_all"
+
+this command is using the same routine used by data validation
+
+-f: Excel file name
+-s: Excel sheet name
+-hr: Number of rows reserved for header - not incl. column name (optional. default is 0)
+-r: Excel column range
+-t: table name in the shared schema  
+
+
+python excel_to_table.py -f "SERNP2_1.xlsx" -s "Sheet1" -hr 0 -r "A:D" -t "sernp_all"
+python cherrypick.py -m material_master_hWEL -p loadready -r MM_SERNP_06_LR_HWEL.yaml -i report
+
+
+git checkout -b feature/MM_POST_DR_updates_20231017/master
+
+git checkout -b feature/IB_CONS_hwel_serial_qty/master
+
+python cherrypick.py -m material_master_hWEL -p postload -v CSDT-01-POST_BASIC_MISSING.sql -r CSDT-01-POST_BASIC_MISSING.yaml -i all
+python cherrypick.py -m material_master_hWEL -p postload -v CSDT-01-POST_PLANT_MISSING.sql -r CSDT-01-POST_PLANT_MISSING.yaml -i all
+
+python cherrypick.py -m material_master_hWEL -p loadready -r MM_MARC_12_LR_HWEL.yaml -i report
+
+python cherrypick.py -m material_master_hWEL -p loadready -r MM_MARD_01_LR_HWEL.yaml -i report
+
+python cherrypick.py -m material_master_hWEL -p loadready -v PK-27085_hWEL_LR_SERPN-06_serial_number_profile_mismatch_file.sql -r MM_SERNP_06_LR_HWEL.yaml -i all
+
+SELECT count(*)
+FROM EXT.LND_MARA wel 
+JOIN EXT_BHP.LND_MARA_BHP bhp 
+	ON wel.MATNR=bhp.MATNR 
+WHERE LENGTH(wel.MATNR)>0 
+AND wel.LVORM IS NULL 
+AND bhp.LVORM IS NULL
+
+
+git checkout -b feature/IBEWM_hwel_preload_review/master
+git checkout -b feature/MM_hWEL_LR_marc_12/master
+
+
+git checkout -b feature/OP_add_jira/master
+git checkout -b feature/MM_hBHP_defect_6851/master
+git checkout -b feature/MM_hWEL_defect_3608/master
+
+
+python cherrypick.py -m material_master_hBHP -p loadready -v MARA-03-CLN_RESB-HBHP.sql -r MM_MARA_03_CLN_BHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p postload -v PK-22878_hBHP_POST_MARA-03_missing_matnr_plant_from_resb.sql -r MM_MARA_03_POST_HBHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p preload -v PK-22877_hBHP_PRE_MARA-03_missing_material_resb.sql -r MM_MARA_03_HBHP.yaml -i all
+
+python cherrypick.py -m material_master_hBHP -p loadready -v PK-23384_hBHP_LR_MARC-01_missing_matnr_plant_resb.sql -r MM_MARC_01_CLN_BHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p postload -v PK-22895_hBHP_POST_MARC-01_missing_matnr_plant_from_resb.sql -r MM_MARC_01_POST_HBHP.yaml -i all
+python cherrypick.py -m material_master_hBHP -p preload -v PK-22894_hBHP_PRE_MARC-01_missing_material_plant_resb.sql -r MM_MARC_01_HBHP.yaml -i all
+
+
+git checkout -b feature/MM_batch_mgnt_20231127/master
+
+LOAD_VAL_WEL.S4_DCT_EWM_INV_BAL
+
+instead of 
+load_val_wel.S4_inv_bal_ewm
+
+Material	Plant	DF at plant level	Serial no. profile
+
+Material	Plant	Serial no. profile
+
+python excel_to_table.py -f "SERNP_ALL.xlsx" -s "Sheet1" -hr 0 -r "A:C" -t "sernp_all"
+
+git checkout -b feature/IBEWM_stock_val_20231128/master
+git checkout -b feature/IBEWM_stock_val_20231129/master
+
+git checkout -b feature/MM_hBHP_LR_Batch01/master
+
+
+python cherrypick.py -m material_master_hWEL -p loadready -r MM_MARC_13_LR_HWEL_nwo_check.yaml -i report
+
+git checkout -b feature/MM_hWEL_LR_marc13/master
+
+git checkout -b feature/MM_hWEL_marc13_ecc_plant/master
+
+
+
+python cherrypick.py -m material_master_hBHP -p loadready  -r MM_MARA_09_LR_HBHP.yaml -i report
+
+python cherrypick.py -m material_master_hWEL_s4 -p postload  -r MM_S4_MARC_MRP_HWEL.yaml -i report
+
+-- MATERIAL_NUMBER PLANT STOR_LOC_EP  in MARC nno in MARD
+SELECT MATERIAL_NUMBER PLANT STOR_LOC_EP 
+FROM STG_OBJ_HBHP.TGT_HBHP_4781_MM_PRELOAD_PURCHASING 
+WHERE RIGHT(PLANT2) <> '40'
+EXCEPT
+SELECT MATERIAL_NUMBER PLANT STORAGE_LOCATION  
+FROM STG_OBJ_HBHP.TGT_HBHP_4781_MM_PRELOAD_STORAGELOC
+
+-- MATERIAL_NUMBER PLANT ISSUE_STORAGE_LOCATION 
+SELECT MATERIAL_NUMBER PLANT ISSUE_STORAGE_LOCATION 
+FROM STG_OBJ_HBHP.TGT_HBHP_4781_MM_PRELOAD_PURCHASING 
+WHERE RIGHT(PLANT2) <> '40'
+EXCEPT
+SELECT MATERIAL_NUMBER PLANT STORAGE_LOCATION  
+FROM STG_OBJ_HBHP.TGT_HBHP_4781_MM_PRELOAD_STORAGELOC
+
+
+
+python cherrypick.py -m open_po_hWEL -p loadready -r PO_01_test.yaml 
+
+
+
+excel_to_table.py -f "data_load/DAF33001164.xlsx" -s "DAF 33001164" -h 0 -r "A:AO" -t "daf_migration_test"  
+
+
+git checkout -b feature/MM_S4_MARC_checks/master
+git checkout -b feature/email_and_schedule_functionalities/master
+git checkout -b feature/post_live_reports/master
+git checkout -b feature/stock_out_reports_update/master
+
+
+git checkout -b feature/last_commit_for_keystone/master
+
+	
+
+
+
+python data_validation.py clms_supplier --loadready --transform -s no
+python data_validation.py clms_load_mapping_file --loadready -s no
+python data_validation.py clms_load_mapping_file --loadready --transform -s no
+
+python cherrypick.py -m clms_supplier -p loadready -r 02_s4h_compare_previous.yaml 
+
+
+-- TEST AZCOPY LOAD DIRECTORY AND FILE FROM LOCAL
+azcopy.exe copy "C:\Temp\AWS\wseusr\wessp\store\test-special-characters" "https://imtwdutstrprmry.blob.core.windows.net/icmlegacyupload/TEST?si=legacyupload&spr=https&sv=2022-11-02&sr=c&sig=...." --recursive
+
+azcopy.exe copy "https://wpl-wrk-cds-np-unzip-bucket.s3.ap-southeast-2.amazonaws.com/gcms-load-2/documents3/wseusr/wessp/store/01490/Rfx/" "https://imtwdutstrprmry.blob.core.windows.net/icmlegacyupload/TEST_S3?si=legacyupload&spr=https&sv=2022-11-02&sr=c&sig=..." --recursive
+
+https://wpl-wrk-cds-np-unzip-bucket.s3.ap-southeast-2.amazonaws.com/gcms-load-2/documents3/wseusr/wessp/store/01490/Rfx/
+
+
+wget -O azcopy_v10.tar.gz https://azcopyvnext.azureedge.net/releases/release-10.24.0-20240326/azcopy_linux_amd64_10.24.0.tar.gz && tar -xf azcopy_v10.tar.gz --strip-components=1
+
+
+azcopy.exe copy 's3://wpl-wrk-cds-np-unzip-bucket/gcms-load-2/documents3/wseusr/wessp/store/01490/Rfx/' 'https://imtwdutstrprmry.blob.core.windows.net/icmlegacyupload/TEST_S3?si=legacyupload&spr=https&sv=2022-11-02&sr=c&sig=.....' --recursive
+
+
+
+
+
+
+--Command Line to Create folder tree
+tree /f /a > c:\temp\tree.txt
+--Command Line to list folder and subfolders
+dir /s /b /o:gn > c:\temp\list-dir-round2.txt
+
+
+-- list files (recursive) and it's size using powershell
+PS C:\temp\aws> Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd" -Recurse | Select-Object -Property FullName, Length | Where-Object -Property Length -gt 0 | Export-Csv -Path "C:\Temp\list-ps.txt" -Force -NoTypeInformation
+
+Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd\ProCon HWEL Documents - Contracts" -Recurse | Select-Object -Property FullName, Length | Where-Object -Property Length | Export-Csv -Path "C:\Temp\list-procon-hwel-contracts.txt" -Force -NoTypeInformation
+Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd\ProCon HWEL Documents - Tenders" -Recurse | Select-Object -Property FullName, Length | Where-Object -Property Length | Export-Csv -Path "C:\Temp\list-procon-hwel-tenders.txt" -Force -NoTypeInformation
+
+Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd\ProCon HBHP Documents - Contracts" -Recurse | Select-Object -Property FullName, Length | Where-Object -Property Length | Export-Csv -Path "C:\Temp\list-procon-hbhp-contracts.txt" -Force -NoTypeInformation
+
+
+https://woodsideenergy.sharepoint.com/sites/IcertisMigrationCorporateProd/Corporate Affairs/Framework/4610003616_EUROTEXTE SARL LEXCELERA/FA_Parent/M001_Contract/Executed version(PDF)/
+
+
+4610003616 WEL Lexcelera Outline Agreement for Translation Services SIGNED.pdf
+
+
+
+
+Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd" -Recurse | Select-Object -Property FullName, Length | Where-Object -Property Length -gt 0 | Export-Csv -Path "C:\Temp\list-ps.txt" -Force -NoTypeInformation
+
+Get-ChildItem -Path "C:\Users\W77176\Woodside Energy Ltd\ProCon HWEL Documents - Contracts" -Recurse -directory | Select FullName | Export-Csv -Path "C:\Temp\list-procon-hwel-contracts.txt"
+
+
+
+\\wde.woodside.com.au\Shares\WDE\notbackedup\scratch\RE_EXTRACT\
+
+\\wde.woodside.com.au\Shares\WDE\notbackedup\scratch\RE_EXTRACT\MHH_FILES
+
+
+
+
+Clear Git History -------------------------------
+
+Create a temporary branch and checkout:
+$ git checkout --orphan temp_branch
+
+Add all files to the temporary branch and commit the changes:
+$ git add -A
+$ git commit -am "The first commit"
+
+Delete the master branch:
+$ git branch -D main
+
+Rename the temporary branch to master:
+$ git branch -m main
+
+Forcefully update the remote repository:
+$ git push -f origin main
+
+
+
+
+
+python excel_to_table.py -f "MDUB_27032024.xlsx" -s "Sheet1" -hr 0 -r "A:BA" -t "s4_mdub"
+python excel_to_table.py -f "C:\\Users\\W77176\\OneDrive - Woodside Energy Ltd\\Documents\\WORKBENCH\\PROJECTS\\CLMS\\LOAD_MAPPING\\load_hbhp_to_s3.xlsx" -s "Sheet1" -hr 0 -r "A:G" -t "PROCON_HBHP_MIGRATED_FILES"  
+
+
+C:\Users\W77176\OneDrive - Woodside Energy Ltd\Documents\WORKBENCH\PROJECTS\CLMS\LOAD_MAPPING\load_hbhp_to_s3.xlsx
+
+
+python import_file.py -f "load_hbhp_to_s3.xlsx" -t PROCON_HBHP_MIGRATED_FILES -s "Sheet1" -r "A:G" -x "PH0_HBHP"
+
+
+
+
+python pipe_to_table.py -t PROCON_FILES_TEMP -f "C:\\Temp\\clms\\procon\\header\\column-header.log" -a replace -sep pipe -x log -hr Y
+
+python pipe_to_table.py -t PROCON_FILES_TEMP -f "C:\\Temp\\clms\\procon" -sep pipe -x log -hr N
+
+
+
+P0-000217-01-01-01
+CLMS / iCertis Project
